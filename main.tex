@@ -1,0 +1,244 @@
+% =============================================================================
+% International resume template, based on AltaCV (https://github.com/liantze/AltaCV)
+% Example content below is Fernando Gomes's real, public resume (phone number
+% removed). Replace the content, keep the structure.
+%
+% Custom macros defined in this preamble (not part of stock AltaCV):
+%   \jobguard     - keep-together guard placed right before a \cvevent block,
+%                   so a job entry does not get split across a page break.
+%   \sectionguard - lighter keep-together guard for section headers, so a
+%                   \cvsection heading is not orphaned at the bottom of a page.
+%   \techline      - renders a "Technologies: ..." line inside a job's
+%                   itemize block, visually secondary (smaller, tighter
+%                   leading) to the bullet points above it.
+% Keep these three macros if you keep the multi-page, bullet-heavy layout;
+% drop them if you rewrite the structure.
+%
+% ATS (Applicant Tracking System) tweaks baked into this preamble - keep them:
+%   - \input{glyphtounicode} + \pdfgentounicode=1 (pdfLaTeX branch): maps
+%     ligature glyphs (ff, fi, fl, ffi, ffl) back to real letters in the
+%     PDF's text layer, so ATS parsers extracting text don't read "ﷁ" as a
+%     dropped/garbled character where "ffi" should be.
+%   - FontAwesome icons (\faAt, \faLinkedin, \faPhone, \faMapMarker,
+%     \faCalendar, \faGlobe) are redefined to empty in \AtBeginDocument:
+%     some ATS parsers extract icon glyphs as corrupted/unmapped characters
+%     right next to the e-mail/phone/location text, which can break field
+%     extraction. Removing the icons keeps the text clean while keeping the
+%     \textbar-separated layout.
+% =============================================================================
+\PassOptionsToPackage{dvipsnames}{xcolor}
+
+%\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
+\documentclass[10pt,a4paper,normalphoto]{altacv}
+
+\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}
+
+\usepackage{paracol}
+\usepackage{hyperref}
+\usepackage{needspace}
+
+% Layout: intentional 3-page design
+\raggedbottom
+% Consistent, slightly tighter bullet spacing throughout
+\setlist[itemize]{itemsep=2pt, topsep=4pt, parsep=0pt}
+% Keep-together guards
+\newcommand{\jobguard}{\vspace{2pt}\Needspace{8\baselineskip}}
+\newcommand{\sectionguard}{\Needspace{5\baselineskip}}
+% Technologies line: visually secondary, small gap before, tighter leading
+\newcommand{\techline}[1]{\vspace{3pt}\item[--]{\footnotesize\linespread{0.92}\selectfont \textbf{Technologies:} #1}}
+
+\ifxetexorluatex
+  \setmainfont{Roboto Slab}
+  \setsansfont{Lato}
+  \renewcommand{\familydefault}{\sfdefault}
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage[rm]{roboto}
+  \usepackage[defaultsans]{lato}
+  \renewcommand{\familydefault}{\sfdefault}
+  % ATS: map ligatures (ff, fi, fl...) to real letters in text extraction
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\fi
+
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+\definecolor{LightGrey}{HTML}{666666}
+\definecolor{DarkPastelRed}{HTML}{3775cc}
+\definecolor{PastelRed}{HTML}{5a7ed1}
+\definecolor{GoldenEarth}{HTML}{E7D192}
+\colorlet{name}{black}
+\colorlet{tagline}{PastelRed}
+\colorlet{heading}{DarkPastelRed}
+\colorlet{headingrule}{GoldenEarth}
+\colorlet{subheading}{PastelRed}
+\colorlet{accent}{PastelRed}
+\colorlet{emphasis}{SlateGrey}
+\colorlet{body}{LightGrey}
+\usepackage{hyperref}
+
+\renewcommand{\namefont}{\Huge\rmfamily\bfseries}
+\renewcommand{\personalinfofont}{\small}
+\renewcommand{\cvsectionfont}{\LARGE\rmfamily\bfseries}
+\renewcommand{\cvsubsectionfont}{\large\bfseries}
+
+\renewcommand{\itemmarker}{{\small\textbullet}}
+\renewcommand{\ratingmarker}{\faCircle}
+
+% ATS: strip FontAwesome icons (extracted as corrupted chars by parsers)
+\AtBeginDocument{%
+  \renewcommand{\faAt}{}%
+  \renewcommand{\faLinkedin}{}%
+  \renewcommand{\faPhone}{}%
+  \renewcommand{\faMapMarker}{}%
+  \renewcommand{\faCalendar}{}%
+  \renewcommand{\faGlobe}{}%
+}
+
+\addbibresource{sample.bib}
+
+\begin{document}
+\name{FERNANDO GOMES}
+\tagline{Senior Software Engineer \& Technical Lead | Java, Distributed Systems \& FinTech}
+
+\personalinfo{%
+    \href{https://linkedin.com/in/fhgomes}{linkedin.com/in/fhgomes} \textbar\ \href{mailto:tech.fernando.gomes@gmail.com}{tech.fernando.gomes@gmail.com} % \textbar\ +1 555 0100
+     \textbar\ Brazil%
+}
+\makecvheader
+
+\cvsection{Summary}
+
+Staff-level Software Engineer and Technical Lead with 16 years of experience designing, modernizing, and scaling distributed systems across payments, banking, e-commerce, and enterprise platforms. Deep expertise in Java, Spring Boot, microservices, event-driven architecture, and production reliability. Led legacy modernizations that cut critical incidents by 90\% and latency by 89\%, mentoring engineers and owning systems from architecture through production. Experienced working with distributed North American teams and driving AI-assisted engineering practices.
+
+\medskip
+
+\cvsection{Work Experience}
+
+\cvevent{Senior Software Engineer --- Tech Lead}{InComm Payments}{Oct 2024 -- Present}{Remote, Brazil / United States}
+\begin{itemize}
+\item[\phantom{{\small\textbullet}}] Build and modernize the core Gift Cards platform used by partners to configure and launch card programs, within a global payments ecosystem processing \$50B+ in annual transaction volume across 1,000+ brand partners and 40+ countries. Focus on the reliability, performance, and security of core platform flows.
+\newline
+\item Cut support tickets by 70\% and critical production incidents by 90\% by leading root-cause remediation and platform stabilization across core workflows.
+\item Led the modernization of a 10-year-old legacy platform, from Java 11/Spring Boot 2.2 to Java 21/Spring Boot 3.5, removing vulnerable dependencies and improving maintainability and compliance readiness.
+\item Re-architected the product-listing workflow in high-traffic modules, reducing latency by 89\%, payload size by 91\%, and memory usage by up to 80\%, validated with load tests at 100\% data parity.
+\item Selected as the team’s AI Engineering Champion, driving adoption of GitHub Copilot, spec-driven development (SDD), context and harness engineering, and agent-assisted workflows.
+\techline{Java 21, Spring Boot 3, RabbitMQ, Docker, Azure, SQL Server, Angular 18+, GitHub Actions, Jenkins, Dynatrace, Splunk, Snyk, Cypress, Playwright, k6, Camunda BPMN, Spec Kit}
+\end{itemize}
+\divider
+
+\jobguard
+\cvevent{Senior Software Engineer | BaaS Platform Development}{Rocket Financial Inc}{Nov 2022 -- Sep 2024}{Remote, Brazil / United States}
+\begin{itemize}
+\item[\phantom{{\small\textbullet}}] Senior Software Engineer on a Banking-as-a-Service (BaaS) platform, an early-stage fintech. Built and integrated payment microservices across several domains, working remotely with a distributed team.
+\newline
+\item Designed and delivered a domestic wire-transfer microservice end to end, integrating with a partner bank and defining contracts with internal payment and account services. Owned it from architecture to production.
+\item Built a workflow orchestrator (BPMS-style) that powered client onboarding and the integration flow with point-of-sale (POS) terminals, handling account registration, cashback, and external fund transfers across services. Also delivered features across other domains like Transactions and ACH.
+\item Authored engineering standards and development guidelines that improved implementation consistency across teams; selected for the release and technical-interview teams based on technical judgment and communication skills.
+\techline{Java 17+, Spring Boot 3, Kafka, SQS, Docker, Kubernetes, AWS Cloud, Bitbucket, Kibana, Grafana, Argo CD, PostgreSQL, SOLID, Clean Code}
+\end{itemize}
+
+% Intentional break: page 1 ends cleanly after Rocket Financial
+\newpage
+
+\cvevent{Principal Software Engineer and CTO}{PlayMatch}{May 2021 -- Nov 2022}{Remote, Brazil}
+\begin{itemize}
+\item[\phantom{{\small\textbullet}}] At PlayMatch, an early-stage edtech/esports startup, owned the full technology function: architecture, hiring, engineering execution, and process for a new student gaming platform.
+\newline
+\item Architected and delivered a full-stack platform from zero to production in under 3 months --- a clean, scalable microservices design capacity-planned to support up to 200K concurrent students.
+\item Built and led an eight-engineer team (4 backend, 3 frontend, 1 WordPress) as CTO, owning hiring, code review, and technical direction, and mentoring through 1:1s in a startup with no prior engineering structure.
+\item Defined the engineering foundation end to end: microservices on AWS, CI/CD, observability, and the team processes (Scrum/Kanban) that let a small team ship fast under startup constraints.
+\techline{Java 11-15, Spring Boot, JUnit, AWS, Terraform, Serverless, Jenkins, Maven, SonarQube, Cloudflare, Docker, Kubernetes, Fluentd, ELK, OpenSearch, New Relic, React, Redux, Node.js, Webpack, Scrum, Kanban}
+\end{itemize}
+\divider
+
+\jobguard
+\cvevent{Senior Software Engineer III and Tech Lead}{PagSeguro PagBank}{Jul 2020 -- Jun 2021}{Remote, Brazil}
+\begin{itemize}
+\item[\phantom{{\small\textbullet}}] At PagSeguro PagBank, one of Brazil's largest payment companies (UOL group), owned the technical direction of a squad, from architecture and design through delivery and maintenance.
+\newline
+\item Led the squad and the architecture for migrating the B2B retail-network module off a 15-year-old monolith into microservices using the strangler pattern, covering central-account money routing, business rules, and financial edge cases.
+\item During the pandemic, built the processing for a federal government cash-transfer assistance program (``Aux\'ilio Emergencial''), handling 1M+ beneficiary and payment records. Designed it for efficiency, full auditability and traceability, orchestrating calls across 5+ systems where correctness was non-negotiable.
+\item Owned backend and frontend across multiple projects, and rebuilt the Jenkins CI/CD pipeline that sped up delivery beyond my own squad. Drove adoption of TDD and pair programming as standard practice across teams.
+\techline{Java 8-11, Kotlin, Spring, Spring Batch, Docker, Apache Mesos, AWS, Kubernetes, Flyway, Oracle, RabbitMQ, Kafka, Splunk, New Relic, JavaScript, React, Swagger, Scrum, Kanban}
+\end{itemize}
+\divider
+
+\jobguard
+\cvevent{Senior Java Engineer, Tech Lead \& Software Architect}{DB1 Global Software}{Jul 2014 -- Jun 2020}{Maring\'a, Brazil (Hybrid)}
+\begin{itemize}
+\item[\phantom{{\small\textbullet}}] Progressed through senior engineering, technical leadership, and architecture roles, providing technical direction across multiple clients, products, and up to three squads comprising 15 engineers.
+\newline
+\item Led the architecture and migration of a 15-year-old monolith to microservices for BRK Ambiental, aligning three squads with the client's architecture team across operational and billing systems serving 100+ municipalities in 13 states.
+\item Improved performance across critical systems, reducing response time by 70\% and re-engineering a workflow processing 1M+ water and sewage records from several minutes to a few seconds.
+\item Served as founding architect and Tech Lead for ANYMARKET, leading the development of a marketplace integration hub that reached 10 integrations, R\$50M+ in processed GMV, and Black Friday peaks of approximately 1,000 requests per second during my tenure. The platform later expanded to 150+ integrations and R\$10B+ in GMV.
+\item Architected KONCILI, a financial reconciliation platform that automated marketplace payout validation, discrepancy detection, and financial reporting for online sellers.
+\techline{Java 7-11, Spring Boot, Microservices, Oracle, PostgreSQL, Redis, MongoDB, Docker, Docker Swarm, Kubernetes, OpenShift, AWS, RabbitMQ, Apache Artemis, Liquibase/Flyway, Jenkins, CI/CD, TDD, BDD, AngularJS, JavaScript, TypeScript, JBoss, Undertow}
+\end{itemize}
+
+% Intentional break: page 3 opens with Digitaldoc, connecting career start to supporting sections
+\newpage
+
+\cvevent{Java Tech Lead \& Development Manager}{Digitaldoc}{Feb 2010 -- Jul 2014}{Paran\'a, Brazil}
+\begin{itemize}
+\item Led the development team while remaining hands-on across four Java-based document-management products, covering architecture, delivery, maintenance, and cross-department prioritization.
+\item Progressed through Software Analyst, Product Manager, Technical Lead, and Development Manager responsibilities.
+\techline{Java 6-7, Spring, PostgreSQL, MySQL, Oracle, GWT, Redis, MongoDB, AWS, JavaScript, CSS, Jenkins, Jetty, Tomcat, Git, SVN}
+\end{itemize}
+
+\nocite{*}
+
+\bigskip
+
+\sectionguard
+\cvsection{Education}
+
+\cvevent{Bachelor of Technology in Systems Analysis and Development}{UTFPR - Federal Technology University of Paran\'a}{2011}{Brazil}
+
+\bigskip
+
+\sectionguard
+\cvsection{Skills}
+
+\textbf{Languages \& Frameworks:} Java, Kotlin, Spring Boot, JavaScript, TypeScript
+
+\medskip
+\textbf{Architecture:} Distributed Systems, Microservices, Event-Driven Architecture, System Design, REST APIs, gRPC
+
+\medskip
+\textbf{Cloud \& Platform:} AWS, Azure, GCP, Kubernetes, Docker, Terraform, Serverless
+
+\medskip
+\textbf{Messaging \& Data:} Kafka, RabbitMQ, SQS, PostgreSQL, Oracle, SQL Server, Redis, MongoDB
+
+\medskip
+\textbf{Delivery \& Operations:} CI/CD, GitHub Actions, Jenkins, Argo CD, Observability, Grafana, Splunk, Dynatrace
+
+\medskip
+\textbf{AI Engineering:} LLM Integration (Spring AI, LangChain4j), RAG, MCP, Spec-Driven Development, Agent Workflows
+
+\medskip
+\textbf{Practices:} Scrum, Kanban, TDD, BDD, DevSecOps
+
+\bigskip
+
+\sectionguard
+\cvsection{Languages}
+
+\textbf{Portuguese:} Native \quad|\quad \textbf{English:} Full professional proficiency --- daily work with U.S. and Canadian teams since 2020
+
+\bigskip
+
+\Needspace{7\baselineskip}
+\cvsection{Speaking \& Community}
+\nopagebreak
+
+\begin{itemize}
+    \item Conference and community speaker on AI-augmented software engineering, Java architecture, and LLM-powered application development.
+
+    \item Delivered talks at The Developer's Conference (TDC), DevConverge, Java User Groups, virtual technology events, and internal engineering forums.
+
+    \item Technical interviewer and hiring advisor, having conducted 200+ technical interviews for 20+ companies.
+\end{itemize}
+
+\end{document}
